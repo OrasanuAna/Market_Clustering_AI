@@ -6,15 +6,10 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 
-# 1. Colectare date din Yahoo Finance
-# Simboluri bursiere ale unor companii mari
 tickers = [
-    'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'META', 'TSLA', 'NVDA', 'NFLX',  # Tech
-    'INTC', 'AMD', 'IBM', 'ORCL',                                     # Tech hardware/software
+    'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'META', 'TSLA', 'NVDA', 'NFLX', 'INTC', 'AMD', 'IBM', 'ORCL'
 ]
 
-
-# Stocăm informațiile în această listă
 financial_data = []
 
 for ticker in tickers:
@@ -29,30 +24,25 @@ for ticker in tickers:
         "Debt": info.get("totalDebt"),
     })
 
-# Creăm DataFrame-ul
 df = pd.DataFrame(financial_data)
 
-# 2. Curățare și normalizare
-# Eliminăm companiile care au valori lipsă
 df_clean = df.dropna()
 
-# Selectăm doar coloanele numerice
+
 features = ["MarketCap", "Revenue", "Profit", "Debt"]
 X = df_clean[features]
 
-# Normalizăm datele
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
-# 3. Aplicare K-Means
-# Aplicăm K-Means cu 3 clustere (poți schimba numărul)
+
 kmeans = KMeans(n_clusters=3, random_state=0)
 df_clean["Cluster"] = kmeans.fit_predict(X_scaled)
 
-# 4. Salvare rezultate
+
 df_clean.to_csv("data/clustered_companies.csv", index=False)
 
-# 5. Vizualizare PCA
+
 pca = PCA(n_components=2)
 X_pca = pca.fit_transform(X_scaled)
 df_pca = pd.DataFrame(X_pca, columns=["PCA1", "PCA2"])
@@ -76,5 +66,5 @@ plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
 plt.tight_layout()
 plt.show()
 
-# 6. Afișăm rezultatul
+
 print(df_clean[["Company", "Cluster"]])
