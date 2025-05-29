@@ -55,29 +55,29 @@ market-clustering/
 ## ▶️ How to Run
 
 1. Clone the repo:
-   ```bash
+
    git clone https://github.com/yourusername/market-clustering.git
    cd market-clustering
-````
+
 
 2. Create and activate a virtual environment:
 
-   ```bash
+
    python -m venv .venv
    .venv\Scripts\activate  # on Windows
-   ```
+
 
 3. Install dependencies:
 
-   ```bash
+
    pip install -r requirements.txt
-   ```
+
 
 4. Run the project:
 
-   ```bash
+
    python main.py
-   ```
+
 
 ---
 
@@ -85,16 +85,7 @@ market-clustering/
 
 Each company is assigned a cluster (0, 1, or 2) based on its financial profile:
 
-```
 Company,MarketCap,Revenue,Profit,Debt,Cluster
 AAPL,3018375823360,400366010368,1866990005952,981860002432,2
-...
-```
 
----
-
-## 📌 Extensions (optional)
-
-* Integrate with a **Knowledge Graph** to visualize relations between companies (e.g., by sector)
-* Add extra indicators: `beta`, `sector`, `priceToEarnings`
 
